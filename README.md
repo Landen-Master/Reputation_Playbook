@@ -1,5 +1,5 @@
 # Reputation_Playbook
- This program queries multiple reputation vendors for given IP addresses, domains, and files, and generates a succinct report of information from each
+ This program queries multiple reputation aggregators for given IP addresses, domains, and files, and generates a succinct report of information from each
 ## User Guide
 
 This program is written in Python and currently uses the requests library alongside VirusTotal and IBM X-Force's APIs.
@@ -18,7 +18,7 @@ To run the program, run the **main.py** file. When prompted, ***enter the full a
 **Example:** A file named keys.txt in the Users folder: ***C:\Users\keys.txt***\
 **Example:** A file within the directory of the project named data.txt: ***data.txt***
 
-Once the keys are verified, enter any IPv4 address, domain name, or MD5, SHA-1, or SHA-256 file hash to obtain quick reports from different reputation vendors.
+Once the keys are verified, enter any IPv4 address, domain name, or MD5, SHA-1, or SHA-256 file hash to obtain quick reports from different reputation aggregators.
 
 ## For Future Developers
 
