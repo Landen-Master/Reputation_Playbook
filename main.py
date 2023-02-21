@@ -29,16 +29,16 @@ def filetime_to_datetime(filetime):
     return datetime.datetime.utcfromtimestamp(filetime).replace(tzinfo=datetime.timezone.utc)
 
 
-def reputation_calculator(rep, reporter_type):
+def reputation_calculator(rep, aggregator_type):
     """
-        Gives understanding of reputation based on reporter
+        Gives understanding of reputation based on aggregator
     ...
 
         Parameters
         ----------
         rep : int
             reputation of hash, IPV4 address, or domain name
-        reporter_type : string
+        aggregator_type : string
             vendor of specific reputation, as each have different scoring systems
 
         Returns
@@ -50,7 +50,7 @@ def reputation_calculator(rep, reporter_type):
 
     insight = ""                                        # additional information on rating
 
-    match reporter_type:
+    match aggregator_type:
 
         # reputation based on VirusTotal scoring system
         case "VT":
@@ -822,7 +822,7 @@ def IBM_hash(user_input, IBM_token):
 
 def domain_info(user_input, vt_key, IBM_token):
     """
-        Queries multiple reputation reporters on a specific domain name and prints returned information in succinct table
+        Queries multiple reputation aggregators on a specific domain name and prints returned information in succinct table
     ...
 
         Parameters
@@ -842,7 +842,7 @@ def domain_info(user_input, vt_key, IBM_token):
     # grouping reported findings into single list
     info = [VirusTotal_domain(user_input, vt_key), IBM_domain(user_input, IBM_token), talos]
 
-    headers = ["Reporter", "Reputation", "Certificate Expiration Date", "Vendor Specific Information", "Link"]
+    headers = ["Aggregator", "Reputation", "Certificate Expiration Date", "Vendor Specific Information", "Link"]
     header_fields = ["name", "reputation", "expires", "link"]  # fields from header information
 
     t = PrettyTable(headers)  # creating table to print information into
@@ -873,7 +873,7 @@ def domain_info(user_input, vt_key, IBM_token):
 
 def ip_info(user_input, vt_key, IBM_token):
     """
-        Queries multiple reputation reporters on a specific IPV4 address and prints returned information in succinct table
+        Queries multiple reputation aggregators on a specific IPV4 address and prints returned information in succinct table
     ...
 
         Parameters
@@ -893,7 +893,7 @@ def ip_info(user_input, vt_key, IBM_token):
     # grouping reported findings into single list
     info = [VirusTotal_IP(user_input, vt_key), IBM_IP(user_input, IBM_token), talos]
 
-    headers = ["Reporter", "Reputation", "Country", "Owner", "Vendor Specific Information", "Link"]
+    headers = ["Aggregator", "Reputation", "Country", "Owner", "Vendor Specific Information", "Link"]
     header_fields = ["name", "reputation", "country", "owner", "link"]  # fields from header information
 
     t = PrettyTable(headers)  # creating table to print information into
@@ -924,7 +924,7 @@ def ip_info(user_input, vt_key, IBM_token):
 
 def hash_info(user_input, vt_key, IBM_token, sha256_check):
     """
-            Queries multiple reputation reporters on a specific file hash and prints returned information in succinct table
+            Queries multiple reputation aggregators on a specific file hash and prints returned information in succinct table
         ...
 
             Parameters
@@ -944,8 +944,7 @@ def hash_info(user_input, vt_key, IBM_token, sha256_check):
 
     # grouping reported findings into single list
     info = [VirusTotal_hash(user_input, vt_key), IBM_hash(user_input, IBM_token), talos]
-    headers = ["Reporter", "Reputation", "Malware Category", "File Type", "Date Created", "Vendor Specific Information",
-               "Link"]
+    headers = ["Aggregator", "Reputation", "Malware Category", "File Type", "Date Created", "Vendor Specific " "Information", "Link"]
     header_fields = ["name", "reputation", "category", "type", "created", "link"]  # fields from header information
 
     t = PrettyTable(headers)  # creating table to print information into
